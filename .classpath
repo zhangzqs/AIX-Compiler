@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="annotations-src"/>
+	<classpathentry kind="lib" path="lib/d8.jar"/>
+	<classpathentry kind="lib" path="lib/ecj-4.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/javassist.jar"/>
+	<classpathentry kind="lib" path="lib/jsoup-1.12.1.jar"/>
+	<classpathentry kind="lib" path="lib/zip4j-2.2.3.jar"/>
+	<classpathentry kind="lib" path="lib/json.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
