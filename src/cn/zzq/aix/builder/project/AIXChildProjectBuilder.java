@@ -22,15 +22,11 @@ public class AIXChildProjectBuilder {
 	private Path androidRuntimeJar;
 
 	/**
-	 * @param aixChildExtension
-	 *            aix子工程对象
-	 * @param androidRuntimeJar
-	 *            AndroidRuntime.jar文件，一般是工程项目中用户编写的所有代码
-	 * @param outputDir
-	 *            aix编译出来释放的目录，一般该目录下有一个组件包的components.json,files目录等
+	 * @param aixChildExtension aix子工程对象
+	 * @param androidRuntimeJar AndroidRuntime.jar文件，一般是工程项目中用户编写的所有代码
+	 * @param outputDir         aix编译出来释放的目录，一般该目录下有一个组件包的components.json,files目录等
 	 */
-	public AIXChildProjectBuilder(AIXChildProject aixChildExtension,
-			Path androidRuntimeJar, Path outputDir) {
+	public AIXChildProjectBuilder(AIXChildProject aixChildExtension, Path androidRuntimeJar, Path outputDir) {
 		this.aixChildExtension = aixChildExtension;
 		this.outputDir = outputDir;
 		this.androidRuntimeJar = androidRuntimeJar;
@@ -39,9 +35,8 @@ public class AIXChildProjectBuilder {
 	private void buildDexFile() {
 		Logger.log("从AndroidRuntime.jar及所需依赖生成classes.dex文件并打包为classes.jar");
 		D8Builder d8Builder = new D8Builder();
-		//d8Builder.setMinSdk(24);
-		d8Builder.addClassPaths(outputDir.forward("files")
-				.listAllChildrenBySuffix(".jar"));
+		// d8Builder.setMinSdk(24);
+		d8Builder.addClassPaths(outputDir.forward("files").listAllChildrenBySuffix(".jar"));
 		d8Builder.setOutputPath(outputDir);
 		d8Builder.start();
 		try {
@@ -70,15 +65,14 @@ public class AIXChildProjectBuilder {
 		return aixChildExtension.generateMarkdowns();
 	}
 
-	public Map<String,String> generateXmls(){
+	public Map<String, String> generateXmls() {
 		return aixChildExtension.generateXmls();
 	}
-	
+
 	private Path buildComponentsJson() {
 		Logger.log("正在构建components.js");
 		try {
-			return outputDir.forward("components.json").appendText(
-					aixChildExtension.generateComponentsInfo());
+			return outputDir.forward("components.json").appendText(aixChildExtension.generateComponentsInfo());
 		} catch (IOException e) {
 			Logger.err("写入components.json发生异常");
 			e.printStackTrace();
@@ -89,8 +83,8 @@ public class AIXChildProjectBuilder {
 	private Path buildComponentBuildInfosJson() {
 		Logger.log("正在构建component_build_infos.json");
 		try {
-			return outputDir.forward("files","component_build_infos.json").appendText(
-					aixChildExtension.generateComponentsBuildInfo());
+			return outputDir.forward("files", "component_build_infos.json")
+					.appendText(aixChildExtension.generateComponentsBuildInfo());
 		} catch (IOException e) {
 			Logger.err("写入component_build_infos.json发生异常");
 			e.printStackTrace();
@@ -103,13 +97,11 @@ public class AIXChildProjectBuilder {
 	 */
 	private void copyJnis() {
 		Logger.log("开始复制jni");
-		Set<NativeLibrary> nativeLibraries = aixChildExtension
-				.getNativeLibraries(jniDirPaths);
+		Set<NativeLibrary> nativeLibraries = aixChildExtension.getNativeLibraries(jniDirPaths);
 		for (NativeLibrary nativeLibrary : nativeLibraries) {
 			try {
-				nativeLibrary.libFile.copyTo(outputDir.forward("jni",
-						nativeLibrary.architecture,
-						nativeLibrary.libFile.getName()));
+				nativeLibrary.libFile
+						.copyTo(outputDir.forward("jni", nativeLibrary.architecture, nativeLibrary.libFile.getName()));
 			} catch (IOException e) {
 				Logger.log("复制Jni库文件是发生异常,相关文件资源：" + nativeLibrary);
 				e.printStackTrace();
@@ -151,8 +143,7 @@ public class AIXChildProjectBuilder {
 		}
 
 		try {
-			androidRuntimeJar.copyTo(targetDir.forward(androidRuntimeJar
-					.getName()));
+			androidRuntimeJar.copyTo(targetDir.forward(androidRuntimeJar.getName()));
 		} catch (IOException e) {
 			Logger.log("复制AndroidRuntime.jar时发生异常,相关文件资源：" + androidRuntimeJar);
 			e.printStackTrace();

@@ -13,14 +13,14 @@ public class ComponentXMLGenerator extends ComponentDocumentBase {
 	}
 
 	public String generateXMLDescriptor() {
-		Element e= new cn.zzq.aix.builder.descriptor.Component(component).toXmlElement();
-		Document doc=new Document("");
+		Element e = new cn.zzq.aix.builder.descriptor.Component(component).toXmlElement();
+		Document doc = new Document("");
 		doc.appendChild(e);
-		OutputSettings os=new OutputSettings();
+		OutputSettings os = new OutputSettings();
 		os.charset("utf-8");
-		//os.prettyPrint(false);
+		// os.prettyPrint(false);
 		os.indentAmount(4);
-		//os.escapeMode(EscapeMode.xhtml);
+		// os.escapeMode(EscapeMode.xhtml);
 		os.syntax(Syntax.xml);
 		doc.outputSettings(os);
 		return doc.toString();

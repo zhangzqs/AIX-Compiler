@@ -28,54 +28,50 @@ public class NativeLibrary {
 	/**
 	 * 由ai的jni库的存放路径和native库名来创建一个Native库对象
 	 * 
-	 * @param jniDir
-	 *            存放jni的目录
-	 * @param nativeLibraryName
-	 *            native库的名称 一般为 so文件名称-架构后缀
-	 *            所构成，比如libhello.so-v7a,表示从jni的armeabi-v7a目录查找
+	 * @param jniDir            存放jni的目录
+	 * @param nativeLibraryName native库的名称 一般为 so文件名称-架构后缀
+	 *                          所构成，比如libhello.so-v7a,表示从jni的armeabi-v7a目录查找
 	 */
-	public static NativeLibrary getNativeLibrary(Path jniDir,
-			String nativeLibraryName) {
+	public static NativeLibrary getNativeLibrary(Path jniDir, String nativeLibraryName) {
 		String architecture = getArchitectureByName(nativeLibraryName);
-		String soFileName = nativeLibraryName.substring(0,
-				nativeLibraryName.length() - 4);// 消除-x86,-64,-v8a,-v7a后缀
+		String soFileName = nativeLibraryName.substring(0, nativeLibraryName.length() - 4);// 消除-x86,-64,-v8a,-v7a后缀
 		Path libFile = jniDir.forward(architecture, soFileName);
-		if(!libFile.exists()){
+		if (!libFile.exists()) {
 			return null;
 		}
 		return new NativeLibrary(architecture, libFile);
 	}
 
-	public String getSimpleArchitecture(){
+	public String getSimpleArchitecture() {
 		return getArchitectSuffixByFullName(architecture);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Architecture:"+architecture+"; File:"+libFile+";";
+		return "Architecture:" + architecture + "; File:" + libFile + ";";
 	}
-	private static String getArchitectSuffixByFullName(String fullName){
-		if(fullName.equals(X86)){
+
+	private static String getArchitectSuffixByFullName(String fullName) {
+		if (fullName.equals(X86)) {
 			return ComponentBuildInfo.X86_SUFFIX;
-		}else if(fullName.equals(X86_64)){
+		} else if (fullName.equals(X86_64)) {
 			return ComponentBuildInfo.X86_64_SUFFIX;
-		}else if(fullName.equals(ARM64_V8A)){
+		} else if (fullName.equals(ARM64_V8A)) {
 			return ComponentBuildInfo.ARM64_V8A_SUFFIX;
-		}else if(fullName.equals(ARMEABI_V7A)){
+		} else if (fullName.equals(ARMEABI_V7A)) {
 			return ComponentBuildInfo.ARMEABI_V7A_SUFFIX;
 		}
 		return null;
 	}
+
 	private static String getArchitectureByName(String nativeLibraryName) {
 		if (nativeLibraryName.endsWith(ComponentBuildInfo.X86_SUFFIX)) {
 			return X86;
 		} else if (nativeLibraryName.endsWith(ComponentBuildInfo.X86_64_SUFFIX)) {
 			return X86_64;
-		} else if (nativeLibraryName
-				.endsWith(ComponentBuildInfo.ARMEABI_V7A_SUFFIX)) {
+		} else if (nativeLibraryName.endsWith(ComponentBuildInfo.ARMEABI_V7A_SUFFIX)) {
 			return ARMEABI_V7A;
-		} else if (nativeLibraryName
-				.endsWith(ComponentBuildInfo.ARM64_V8A_SUFFIX)) {
+		} else if (nativeLibraryName.endsWith(ComponentBuildInfo.ARM64_V8A_SUFFIX)) {
 			return ARM64_V8A;
 		}
 		return null;

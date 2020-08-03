@@ -18,14 +18,14 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface SimpleEvent {
-  /**
-   * If non-empty, description to use in user-level documentation in place of
-   * Javadoc, which is meant for developers.
-   */
-  String description() default "";
+	/**
+	 * If non-empty, description to use in user-level documentation in place of
+	 * Javadoc, which is meant for developers.
+	 */
+	String description() default "";
 
-  /**
-   * If false, this event should not be accessible through Codeblocks.
-   */
-  boolean userVisible() default true;
+	/**
+	 * If false, this event should not be accessible through Codeblocks.
+	 */
+	boolean userVisible() default true;
 }

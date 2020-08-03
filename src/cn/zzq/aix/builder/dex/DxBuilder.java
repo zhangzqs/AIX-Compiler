@@ -1,11 +1,12 @@
-//package cn.zzq.aix.builder.dex;
+package cn.zzq.aix.builder.dex;
+
 //
 //import com.android.dx.command.Main;
 //
 //import cn.zzq.aix.builder.utils.Logger;
 //import cn.zzq.aix.builder.utils.Path;
 //
-//public class DxBuilder extends DexBuilder {
+public class DxBuilder extends DexBuilder {
 //
 //	/**
 //	 * 构建设置编译器输出路径的命令行
@@ -59,12 +60,12 @@
 //		return sb.toString();
 //	}
 //
-//	@Override
-//	public void start() {
+	@Override
+	public void start() {
 //		outputPath.mkdirs();
 //		String command = buildCommand();
 //		Logger.log("执行的dx命令 " + command);
 //		String[] commands = command.toString().split(" ");
 //		Main.main(commands);
-//	}
-//}
+	}
+}

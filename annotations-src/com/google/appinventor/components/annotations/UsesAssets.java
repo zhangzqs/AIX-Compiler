@@ -19,8 +19,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface UsesAssets {
-  /**
-   * The filenames of the required assets separated by commas.
-   */
-  String fileNames() default "";
+	/**
+	 * The filenames of the required assets separated by commas.
+	 */
+	String fileNames() default "";
 }

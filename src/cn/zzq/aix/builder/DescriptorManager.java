@@ -30,11 +30,11 @@ public class DescriptorManager {
 	}
 
 	public void addXmlDescriptor(Document doc) {
-		
+
 		doc.getElementsByTag("Component").forEach((ele) -> {
 			addXmlDescriptor(ele);
 		});
-		//System.out.println(doc);
+		// System.out.println(doc);
 	}
 
 	public void addXmlDescriptor(String xmlText) {
@@ -53,24 +53,24 @@ public class DescriptorManager {
 		}
 		// 事件注释替换
 		cb.events.forEach((eb) -> {
-			//eb为全组件所有的事件bean对象
+			// eb为全组件所有的事件bean对象
 			String eventName = eb.name;
 			if (descriptor.events.containsKey(eventName)) {
 				// 此时必定不为null
 				Event e = descriptor.events.get(eventName);
-				eb.dict=e.dict;
+				eb.dict = e.dict;
 				eb.description = e.description;
 				for (ParameterBean pb : eb.params) {
 					String parmName = pb.name;
 					if (e.parms.containsKey(parmName)) {
 						// 此时parm必定不为null
 						Parameter parm = e.parms.get(parmName);
-						pb.dict=e.dict;
+						pb.dict = e.dict;
 						pb.description = parm.description;
 					}
 				}
-				//做注释的后期处理
-				eb.description=eb.getDescription();
+				// 做注释的后期处理
+				eb.description = eb.getDescription();
 			}
 		});
 		// 方法注释替换
@@ -80,28 +80,28 @@ public class DescriptorManager {
 				// 此时必定不为null
 				Method e = descriptor.methods.get(methodName);
 				mb.description = e.description;
-				mb.dict=e.dict;
-				mb.returnDescription=e.returnValue;
+				mb.dict = e.dict;
+				mb.returnDescription = e.returnValue;
 				for (ParameterBean pb : mb.params) {
 					String parmName = pb.name;
 					if (e.parms.containsKey(parmName)) {
 						// 此时parm必定不为null
 						Parameter parm = e.parms.get(parmName);
 						pb.description = parm.description;
-						pb.dict=parm.dict;
+						pb.dict = parm.dict;
 					}
 				}
-				//做注释的后期处理
-				mb.description=mb.getDescription();
+				// 做注释的后期处理
+				mb.description = mb.getDescription();
 			}
 		});
-		//属性注释替换
+		// 属性注释替换
 		cb.blockProperties.forEach((pb) -> {
 			String pbName = pb.name;
 			if (descriptor.properties.containsKey(pbName)) {
 				Property p = descriptor.properties.get(pbName);
 				pb.description = p.description;
-				pb.dict=p.dict;
+				pb.dict = p.dict;
 			}
 		});
 	}

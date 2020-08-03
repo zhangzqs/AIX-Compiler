@@ -16,47 +16,47 @@ import com.google.appinventor.components.common.PropertyTypeConstants;
 /**
  * Annotation to mark properties to be visible in the ODE visual designer.
  *
- * <p>Only the setter method of the property must be marked with this
- * annotation.
+ * <p>
+ * Only the setter method of the property must be marked with this annotation.
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface DesignerProperty {
-  /**
-   * Determines the property editor used in the designer.
-   *
-   * @return  property type
-   */
-  String editorType() default PropertyTypeConstants.PROPERTY_TYPE_TEXT;
+	/**
+	 * Determines the property editor used in the designer.
+	 *
+	 * @return property type
+	 */
+	String editorType() default PropertyTypeConstants.PROPERTY_TYPE_TEXT;
 
-  /**
-   * If non-empty, description to use in user-level documentation in place of
-   * Javadoc, which is meant for developers.
-   */
-  String description() default "";
-  
-  /**
-   * Default value of property.
-   *
-   * @return  default property value
-   */
-  String defaultValue() default "";
+	/**
+	 * If non-empty, description to use in user-level documentation in place of
+	 * Javadoc, which is meant for developers.
+	 */
+	String description() default "";
 
-  /**
-   * If true, always send the property even if it is the default value. This
-   * can be used for backward compatibility with older companions when the
-   * default changes from one value to another.
-   *
-   * @return  true if the property should always been sent in code generation,
-   *          false if the default value needn't be sent.
-   */
-  boolean alwaysSend() default false;
+	/**
+	 * Default value of property.
+	 *
+	 * @return default property value
+	 */
+	String defaultValue() default "";
 
-  /**
-   * Arguments passed to editor class.
-   *
-   * @return  editor arguments
-   */
-  String[] editorArgs() default {};
+	/**
+	 * If true, always send the property even if it is the default value. This can
+	 * be used for backward compatibility with older companions when the default
+	 * changes from one value to another.
+	 *
+	 * @return true if the property should always been sent in code generation,
+	 *         false if the default value needn't be sent.
+	 */
+	boolean alwaysSend() default false;
+
+	/**
+	 * Arguments passed to editor class.
+	 *
+	 * @return editor arguments
+	 */
+	String[] editorArgs() default {};
 }

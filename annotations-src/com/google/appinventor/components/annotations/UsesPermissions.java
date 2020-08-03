@@ -17,22 +17,22 @@ import java.lang.annotation.Target;
  * @author markf@google.com (Mark Friedman)
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target({ ElementType.TYPE, ElementType.METHOD })
 public @interface UsesPermissions {
 
-  /**
-   * The names of the permissions separated by commas.
-   *
-   * @return  the permission name
-   * @see android.Manifest.permission
-   */
-  String permissionNames() default "";
+	/**
+	 * The names of the permissions separated by commas.
+	 *
+	 * @return the permission name
+	 * @see android.Manifest.permission
+	 */
+	String permissionNames() default "";
 
-  /**
-   * The names of the permissions as a list.
-   *
-   * @return  the permission names
-   * @see android.Manifest.permission
-   */
-  String[] value() default {};
+	/**
+	 * The names of the permissions as a list.
+	 *
+	 * @return the permission names
+	 * @see android.Manifest.permission
+	 */
+	String[] value() default {};
 }

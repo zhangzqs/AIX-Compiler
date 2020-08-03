@@ -18,7 +18,7 @@ public abstract class Field extends Translatable {
 		super(element);
 		name = element.attr("name");
 
-		description=element.ownText();
+		description = element.ownText();
 	}
 
 	public Field(BlockBean bb) {

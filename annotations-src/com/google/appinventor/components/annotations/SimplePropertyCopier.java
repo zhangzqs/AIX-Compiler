@@ -12,10 +12,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation to mark Simple property copiers.  Usually we can copy properties
- * using their setter and getter but sometimes we those methods don't quite
- * do what we need and we have a separate copier method marked with this
- * annotation and with the name "Copy<property name>".
+ * Annotation to mark Simple property copiers. Usually we can copy properties
+ * using their setter and getter but sometimes we those methods don't quite do
+ * what we need and we have a separate copier method marked with this annotation
+ * and with the name "Copy<property name>".
  *
  * @author markf@google.com (Mark Friedman)
  */

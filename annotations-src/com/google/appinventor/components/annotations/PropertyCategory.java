@@ -7,23 +7,20 @@
 package com.google.appinventor.components.annotations;
 
 /**
- * Categories for Simple properties.  This is used only for documentation.
+ * Categories for Simple properties. This is used only for documentation.
  *
  */
 public enum PropertyCategory {
-  // TODO(user): i18n category names
-  BEHAVIOR("Behavior"),
-  APPEARANCE("Appearance"),
-  DEPRECATED("Deprecated"),
-  UNSET("Unspecified");
+	// TODO(user): i18n category names
+	BEHAVIOR("Behavior"), APPEARANCE("Appearance"), DEPRECATED("Deprecated"), UNSET("Unspecified");
 
-  private String name;
+	private String name;
 
-  PropertyCategory(String categoryName) {
-    name = categoryName;
-  }
+	PropertyCategory(String categoryName) {
+		name = categoryName;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public String getName() {
+		return name;
+	}
 }

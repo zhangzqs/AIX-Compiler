@@ -17,16 +17,16 @@ public class ComponentBuildInfoBean {
 	public Set<String> permissions = Sets.newHashSet();
 
 	/**
-	 * Mapping of component block names to permissions that should be included
-	 * if the block is used.
+	 * Mapping of component block names to permissions that should be included if
+	 * the block is used.
 	 */
-	public Map<String, String[]> conditionalPermissions=Maps.newHashMap();
+	public Map<String, String[]> conditionalPermissions = Maps.newHashMap();
 
 	/**
 	 * Mapping of component block names to broadcast receivers that should be
 	 * included if the block is used.
 	 */
-	public Map<String, String[]> conditionalBroadcastReceivers=Maps.newHashMap();
+	public Map<String, String[]> conditionalBroadcastReceivers = Maps.newHashMap();
 
 	/**
 	 * Libraries required by this component.

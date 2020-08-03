@@ -13,21 +13,20 @@ import java.lang.annotation.Target;
 import com.google.appinventor.components.annotations.androidmanifest.ReceiverElement;
 
 /**
- * Annotation to indicate any broadcast receivers used by
- * a component so that corresponding <receiver> elements can be
- * created in AndroidManifest.xml.
+ * Annotation to indicate any broadcast receivers used by a component so that
+ * corresponding <receiver> elements can be created in AndroidManifest.xml.
  *
  * @author will2596@gmail.com (William Byrne)
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target({ ElementType.TYPE, ElementType.METHOD })
 public @interface UsesBroadcastReceivers {
 
-  /**
-   * An array containing each {@link ReceiverElement}
-   * that is required by the component.
-   *
-   * @return  the array containing the relevant receivers
-   */
-  ReceiverElement[] receivers();
+	/**
+	 * An array containing each {@link ReceiverElement} that is required by the
+	 * component.
+	 *
+	 * @return the array containing the relevant receivers
+	 */
+	ReceiverElement[] receivers();
 }

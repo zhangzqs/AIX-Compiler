@@ -20,17 +20,17 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface UsesLibraries {
 
-  /**
-   * The names of the libraries separated by commas.
-   *
-   * @return  the library name
-   */
-  String libraries() default "";
+	/**
+	 * The names of the libraries separated by commas.
+	 *
+	 * @return the library name
+	 */
+	String libraries() default "";
 
-  /**
-   * The names of the libraries (as an array)
-   *
-   * @return  the array of library names
-   */
-  String[] value() default {};
+	/**
+	 * The names of the libraries (as an array)
+	 *
+	 * @return the array of library names
+	 */
+	String[] value() default {};
 }

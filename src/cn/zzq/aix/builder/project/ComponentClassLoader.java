@@ -21,11 +21,11 @@ import javassist.NotFoundException;
 public class ComponentClassLoader {
 
 	private static ClassPool activeClassPool;
-	
+
 	public static ClassPool getActiveClassPool() {
 		return activeClassPool;
 	}
-	
+
 	// 以包名为key，该包下组件类的CtClass对象存放所有组件
 	private Map<String, Set<CtClass>> componentClassMap = Maps.newHashMap();
 
@@ -118,7 +118,7 @@ public class ComponentClassLoader {
 		}
 		Logger.log("获取组件类完毕，共有" + count + "个组件类");
 
-		ComponentClassLoader.activeClassPool=classPool;
+		ComponentClassLoader.activeClassPool = classPool;
 		return result;
 	}
 

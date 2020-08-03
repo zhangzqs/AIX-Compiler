@@ -17,7 +17,8 @@ public class D8Builder extends DexBuilder {
 //			}
 //		}
 		commandBuilder.add("--lib", RuntimeEnvironment.RUNTIME_LIBRARY_DIR.forward("android.jar"));
-		//commandBuilder.add( RuntimeEnvironment.RUNTIME_LIBRARY_DIR.forward("appinventor-runtime.jar"));
+		// commandBuilder.add(
+		// RuntimeEnvironment.RUNTIME_LIBRARY_DIR.forward("appinventor-runtime.jar"));
 
 	}
 
@@ -47,7 +48,7 @@ public class D8Builder extends DexBuilder {
 
 	private void buildCommand() {
 		buildClassPathsCommand();
-		//commandBuilder.add("--no-desugaring");
+		commandBuilder.add("--no-desugaring");
 		buildDependenciesPathCommand();
 		buildMinSdkCommand();
 		buildOutputPathCommand();

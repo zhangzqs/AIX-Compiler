@@ -16,7 +16,8 @@ public class Event extends EventBean {
 			this.name = method.getName();
 
 			SimpleEvent simpleFunction = (SimpleEvent) method.getAnnotation(SimpleEvent.class);
-			this.description = simpleFunction.description().isEmpty() ? "Here is the description of "+name+" event." : simpleFunction.description();
+			this.description = simpleFunction.description().isEmpty() ? "Here is the description of " + name + " event."
+					: simpleFunction.description();
 			this.userVisible = simpleFunction.userVisible();
 			this.params = Parameter.getMethodParameters(method);
 

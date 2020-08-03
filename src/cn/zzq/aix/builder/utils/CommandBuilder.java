@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import com.google.appinventor.components.runtime.collect.Lists;
 
-
 public class CommandBuilder {
 	private ArrayList<String> commands = Lists.newArrayList();
 
@@ -27,7 +26,7 @@ public class CommandBuilder {
 
 	@Override
 	public String toString() {
-		//commands.forEach(System.out::println);
+		// commands.forEach(System.out::println);
 		if (commands.isEmpty()) {
 			return "";
 		} else {

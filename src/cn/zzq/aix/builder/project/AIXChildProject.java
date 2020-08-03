@@ -53,7 +53,7 @@ public class AIXChildProject {
 
 		// 现在需要将所有的组件类解析成Component对象和ComponentBuildInfo对象
 		Component component = new Component(componentClass);
-		//替换xml注释
+		// 替换xml注释
 		DescriptorManager.getDescriptorManager().process(component);
 		ComponentBuildInfo componentInfo = new ComponentBuildInfo(componentClass);
 		components.add(component);
@@ -107,6 +107,7 @@ public class AIXChildProject {
 		}
 		return mdMap;
 	}
+
 	/**
 	 * 生成组件的xml文档描述，返回一个HashMap，其中key为组件类全名，value为生成的xml文档描述
 	 * 
@@ -115,13 +116,12 @@ public class AIXChildProject {
 	public HashMap<String, String> generateXmls() {
 		HashMap<String, String> mdMap = Maps.newHashMap();
 		for (Component component : components) {
-			ComponentXMLGenerator generator=new ComponentXMLGenerator(component);
-			String xmlText=generator.generateXMLDescriptor();
+			ComponentXMLGenerator generator = new ComponentXMLGenerator(component);
+			String xmlText = generator.generateXMLDescriptor();
 			mdMap.put(component.type + ".xml", xmlText);
 		}
 		return mdMap;
 	}
-
 
 	/**
 	 * 给定一个资源池（由若干个包含资源文件的文件夹所组成），去查找aix子工程所依赖的资源文件并返回

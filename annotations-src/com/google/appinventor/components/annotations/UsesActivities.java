@@ -13,9 +13,8 @@ import java.lang.annotation.Target;
 import com.google.appinventor.components.annotations.androidmanifest.ActivityElement;
 
 /**
- * Annotation to indicate any additional activities required by
- * a component so that corresponding <activity> elements can be added
- * to AndroidManifest.xml.
+ * Annotation to indicate any additional activities required by a component so
+ * that corresponding <activity> elements can be added to AndroidManifest.xml.
  *
  * @author will2596@gmail.com (William Byrne)
  */
@@ -23,11 +22,11 @@ import com.google.appinventor.components.annotations.androidmanifest.ActivityEle
 @Target(ElementType.TYPE)
 public @interface UsesActivities {
 
-  /**
-   * An array containing each {@link ActivityElement}
-   * that is required by the component.
-   *
-   * @return  the array containing the relevant activities
-   */
-  ActivityElement[] activities();
+	/**
+	 * An array containing each {@link ActivityElement} that is required by the
+	 * component.
+	 *
+	 * @return the array containing the relevant activities
+	 */
+	ActivityElement[] activities();
 }

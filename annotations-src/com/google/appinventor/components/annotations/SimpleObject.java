@@ -14,18 +14,19 @@ import java.lang.annotation.Target;
 /**
  * Annotation to mark Simple objects.
  *
- * <p>Note that the Simple compiler will only recognize Java classes marked
- * with this annotation. All other classes will be ignored.
+ * <p>
+ * Note that the Simple compiler will only recognize Java classes marked with
+ * this annotation. All other classes will be ignored.
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface SimpleObject {
 
-    /**
-     * True if this component is an external component.
-     * Setting to True is mandatory for packing Extensions (aix)
-     */
-    boolean external() default false;
+	/**
+	 * True if this component is an external component. Setting to True is mandatory
+	 * for packing Extensions (aix)
+	 */
+	boolean external() default false;
 
 }

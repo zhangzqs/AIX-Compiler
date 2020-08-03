@@ -1,4 +1,5 @@
-//package cn.zzq.aix.builder.compiler;
+package cn.zzq.aix.builder.compiler;
+
 //
 //import java.io.File;
 //import java.util.Arrays;
@@ -8,7 +9,7 @@
 //import cn.zzq.aix.builder.utils.Logger;
 //import cn.zzq.aix.builder.utils.Path;
 //
-//public class KotlinCompiler extends Compiler {
+public class KotlinCompiler extends Compiler {
 //
 //	public KotlinCompiler() {
 //		super();
@@ -63,8 +64,8 @@
 //		return commandBuilder;
 //	}
 //
-//	@Override
-//	public void compile() {
+	@Override
+	public void compile() {
 //		Logger.log("开始编译Kotlin代码");
 //		CommandBuilder command = buildCommand(new CommandBuilder());
 //		Arrays.asList(command.buildCommandArray()).forEach(System.out::println);
@@ -72,6 +73,6 @@
 //
 //		org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.main(command.buildCommandArray());
 //		Logger.log("Kotlin代码编译成功");
-//	}
+	}
 //
-//}
+}

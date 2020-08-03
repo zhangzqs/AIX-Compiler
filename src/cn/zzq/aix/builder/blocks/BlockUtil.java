@@ -103,7 +103,7 @@ public class BlockUtil {
 
 	public static String javaTypeToYailType(CtClass type) {
 
-		//System.out.println(type);
+		// System.out.println(type);
 		if (isInterfaceImpl("com.google.appinventor.components.runtime.Component", type)) {
 			return "component";
 		}

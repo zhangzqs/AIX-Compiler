@@ -38,22 +38,18 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 	public ComponentBuildInfo(CtClass componentClass) throws NotComponentClass {
 		DesignerComponent designerComponent = null;
 		try {
-			designerComponent = (DesignerComponent) componentClass
-					.getAnnotation(DesignerComponent.class);
+			designerComponent = (DesignerComponent) componentClass.getAnnotation(DesignerComponent.class);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		if (designerComponent == null) {
-			throw new NotComponentClass(componentClass,
-					"不存在@DesignerComponent注解");
+			throw new NotComponentClass(componentClass, "不存在@DesignerComponent注解");
 		}
-		//能执行到这里说明全部都是组件类
+		// 能执行到这里说明全部都是组件类
 		type = componentClass.getName();
 		try {
-			androidMinSdk.add(Integer
-					.toString(((DesignerComponent) componentClass
-							.getAnnotation(DesignerComponent.class))
-							.androidMinSdk()));
+			androidMinSdk.add(Integer.toString(
+					((DesignerComponent) componentClass.getAnnotation(DesignerComponent.class)).androidMinSdk()));
 
 			generateAnnotationString(componentClass);
 		} catch (ClassNotFoundException e) {
@@ -62,14 +58,11 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 	}
 
 	@SuppressWarnings("deprecation")
-	private void generateAnnotationString(CtClass componentClass)
-			throws ClassNotFoundException {
+	private void generateAnnotationString(CtClass componentClass) throws ClassNotFoundException {
 		// Gather permissions.
-		UsesPermissions usesPermissions = (UsesPermissions) componentClass
-				.getAnnotation(UsesPermissions.class);
+		UsesPermissions usesPermissions = (UsesPermissions) componentClass.getAnnotation(UsesPermissions.class);
 		if (usesPermissions != null) {
-			for (String permission : usesPermissions.permissionNames().split(
-					",")) {
+			for (String permission : usesPermissions.permissionNames().split(",")) {
 				updateWithNonEmptyValue(permissions, permission);
 			}
 			for (String permission : usesPermissions.value()) {
@@ -78,8 +71,7 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 		}
 
 		// Gather library names. UsesLibraries usesLibraries =
-		UsesLibraries usesLibraries = (UsesLibraries) componentClass
-				.getAnnotation(UsesLibraries.class);
+		UsesLibraries usesLibraries = (UsesLibraries) componentClass.getAnnotation(UsesLibraries.class);
 		if (usesLibraries != null) {
 			for (String library : usesLibraries.libraries().split(",")) {
 				updateWithNonEmptyValue(libraries, library);
@@ -94,39 +86,30 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 				.getAnnotation(UsesNativeLibraries.class);
 		if (usesNativeLibraries != null) {
 			if (!usesNativeLibraries.v7aLibraries().isEmpty()) {
-				for (String v7aLibrary : usesNativeLibraries.v7aLibraries()
-						.split(",")) {
-					updateWithNonEmptyValue(nativeLibraries, v7aLibrary.trim()
-							+ ARMEABI_V7A_SUFFIX);
+				for (String v7aLibrary : usesNativeLibraries.v7aLibraries().split(",")) {
+					updateWithNonEmptyValue(nativeLibraries, v7aLibrary.trim() + ARMEABI_V7A_SUFFIX);
 				}
 			}
 			if (!usesNativeLibraries.v8aLibraries().isEmpty()) {
-				for (String v8aLibrary : usesNativeLibraries.v8aLibraries()
-						.split(",")) {
-					updateWithNonEmptyValue(nativeLibraries, v8aLibrary.trim()
-							+ ARM64_V8A_SUFFIX);
+				for (String v8aLibrary : usesNativeLibraries.v8aLibraries().split(",")) {
+					updateWithNonEmptyValue(nativeLibraries, v8aLibrary.trim() + ARM64_V8A_SUFFIX);
 				}
 			}
 			if (!usesNativeLibraries.x86_64Libraries().isEmpty()) {
-				for (String x8664Library : usesNativeLibraries
-						.x86_64Libraries().split(",")) {
-					updateWithNonEmptyValue(nativeLibraries,
-							x8664Library.trim() + X86_64_SUFFIX);
+				for (String x8664Library : usesNativeLibraries.x86_64Libraries().split(",")) {
+					updateWithNonEmptyValue(nativeLibraries, x8664Library.trim() + X86_64_SUFFIX);
 				}
 			}
 			if (!usesNativeLibraries.x86Libraries().isEmpty()) {
-				for (String x86Library : usesNativeLibraries.x86Libraries()
-						.split(",")) {
-					updateWithNonEmptyValue(nativeLibraries, x86Library.trim()
-							+ X86_SUFFIX);
+				for (String x86Library : usesNativeLibraries.x86Libraries().split(",")) {
+					updateWithNonEmptyValue(nativeLibraries, x86Library.trim() + X86_SUFFIX);
 				}
 			}
 
 		}
 
 		// Gather required files.
-		UsesAssets usesAssets = (UsesAssets) componentClass
-				.getAnnotation(UsesAssets.class);
+		UsesAssets usesAssets = (UsesAssets) componentClass.getAnnotation(UsesAssets.class);
 		if (usesAssets != null) {
 			for (String file : usesAssets.fileNames().split(",")) {
 				updateWithNonEmptyValue(assets, file);
@@ -134,14 +117,12 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 		}
 
 		// Gather the required activities and build their element strings.
-		UsesActivities usesActivities = (UsesActivities) componentClass
-				.getAnnotation(UsesActivities.class);
+		UsesActivities usesActivities = (UsesActivities) componentClass.getAnnotation(UsesActivities.class);
 		if (usesActivities != null) {
 
 			for (ActivityElement ae : usesActivities.activities()) {
 				try {
-					updateWithNonEmptyValue(activities,
-							activityElementToString(ae));
+					updateWithNonEmptyValue(activities, activityElementToString(ae));
 				} catch (IllegalAccessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -161,8 +142,7 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 
 			for (ReceiverElement re : usesBroadcastReceivers.receivers()) {
 				try {
-					updateWithNonEmptyValue(broadcastReceivers,
-							receiverElementToString(re));
+					updateWithNonEmptyValue(broadcastReceivers, receiverElementToString(re));
 				} catch (IllegalAccessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -188,12 +168,10 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 		SimpleBroadcastReceiver simpleBroadcastReceiver = (SimpleBroadcastReceiver) componentClass
 				.getAnnotation(SimpleBroadcastReceiver.class);
 		if (simpleBroadcastReceiver != null) {
-			for (String className : simpleBroadcastReceiver.className().split(
-					",")) {
+			for (String className : simpleBroadcastReceiver.className().split(",")) {
 				StringBuffer nameAndActions = new StringBuffer();
 				nameAndActions.append(className.trim());
-				for (String action : simpleBroadcastReceiver.actions().split(
-						",")) {
+				for (String action : simpleBroadcastReceiver.actions().split(",")) {
 					nameAndActions.append("," + action.trim());
 				}
 				classNameAndActionsBR.add(nameAndActions.toString());
@@ -204,11 +182,9 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 		}
 
 		// 以下为ACC编译器特有的使用XML文件注解
-		UsesXMLActivities usesXMLActivities = (UsesXMLActivities) componentClass
-				.getAnnotation(UsesXMLActivities.class);
+		UsesXMLActivities usesXMLActivities = (UsesXMLActivities) componentClass.getAnnotation(UsesXMLActivities.class);
 		if (usesXMLActivities != null) {
-			for (String xmlFileName : usesXMLActivities.fileNames().trim()
-					.split(",")) {
+			for (String xmlFileName : usesXMLActivities.fileNames().trim().split(",")) {
 				// String xmlText=FileUtils.readTextFile();
 				// TODO
 			}
@@ -218,10 +194,8 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 	/**
 	 * 清空多余的空白字符，并存放到指定的Set集合中
 	 * 
-	 * @param collection
-	 *            Set集合
-	 * @param value
-	 *            字符串
+	 * @param collection Set集合
+	 * @param value      字符串
 	 */
 	private void updateWithNonEmptyValue(Set<String> collection, String value) {
 		// 刪除空白的空格字符
@@ -283,9 +257,8 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 	// Transform an @IntentFilterElement into an XML element String for use
 	// later
 	// in creating AndroidManifest.xml.
-	private static String intentFilterElementToString(
-			IntentFilterElement element) throws IllegalAccessException,
-			InvocationTargetException {
+	private static String intentFilterElementToString(IntentFilterElement element)
+			throws IllegalAccessException, InvocationTargetException {
 		// First, we build the <intent-filter> element's opening tag including
 		// any
 		// receiver element attributes.
@@ -351,12 +324,10 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 		String attributeSeparator = "";
 		for (java.lang.reflect.Method method : methods) {
 			int modCode = method.getModifiers();
-			if (java.lang.reflect.Modifier.isPublic(modCode)
-					&& !java.lang.reflect.Modifier.isStatic(modCode)) {
+			if (java.lang.reflect.Modifier.isPublic(modCode) && !java.lang.reflect.Modifier.isStatic(modCode)) {
 				if (method.getReturnType().getSimpleName().equals("String")) {
 					// It is an XML element attribute.
-					String attributeValue = (String) method.invoke(clazz
-							.cast(element));
+					String attributeValue = (String) method.invoke(clazz.cast(element));
 					if (!attributeValue.equals("")) {
 						attributeString.append(attributeSeparator);
 						attributeString.append("android:");
@@ -379,20 +350,15 @@ public class ComponentBuildInfo extends ComponentBuildInfoBean {
 		StringBuilder subelementString = new StringBuilder("");
 		for (Annotation subelement : subelements) {
 			if (subelement instanceof MetaDataElement) {
-				subelementString
-						.append(metaDataElementToString((MetaDataElement) subelement));
+				subelementString.append(metaDataElementToString((MetaDataElement) subelement));
 			} else if (subelement instanceof IntentFilterElement) {
-				subelementString
-						.append(intentFilterElementToString((IntentFilterElement) subelement));
+				subelementString.append(intentFilterElementToString((IntentFilterElement) subelement));
 			} else if (subelement instanceof ActionElement) {
-				subelementString
-						.append(actionElementToString((ActionElement) subelement));
+				subelementString.append(actionElementToString((ActionElement) subelement));
 			} else if (subelement instanceof CategoryElement) {
-				subelementString
-						.append(categoryElementToString((CategoryElement) subelement));
+				subelementString.append(categoryElementToString((CategoryElement) subelement));
 			} else if (subelement instanceof DataElement) {
-				subelementString
-						.append(dataElementToString((DataElement) subelement));
+				subelementString.append(dataElementToString((DataElement) subelement));
 			}
 		}
 		return subelementString.toString();

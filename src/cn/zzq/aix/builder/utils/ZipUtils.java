@@ -6,12 +6,9 @@ import net.lingala.zip4j.exception.ZipException;
 public class ZipUtils {
 
 	/**
-	 * @param zipFile
-	 *            待解压的文件
-	 * @param password
-	 *            压缩文件的密码，如果无密码，可设为null或空字符串
-	 * @param destinationPath
-	 *            解压的目标目录
+	 * @param zipFile         待解压的文件
+	 * @param password        压缩文件的密码，如果无密码，可设为null或空字符串
+	 * @param destinationPath 解压的目标目录
 	 * @throws ZipException
 	 */
 	public static void unpack(Path zipFile, String password, Path destinationPath) throws ZipException {

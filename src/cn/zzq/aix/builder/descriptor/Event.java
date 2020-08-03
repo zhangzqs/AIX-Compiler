@@ -18,7 +18,7 @@ public class Event extends Method {
 	@Override
 	public Element toXmlElement() {
 		Element element = toXmlElement("Event");
-		parms.forEach((name,parm) -> {
+		parms.forEach((name, parm) -> {
 			element.appendChild(parm.toXmlElement());
 		});
 		return element;

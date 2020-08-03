@@ -45,7 +45,7 @@ public class BlockClassifier {
 					desigableProperties.add(new DesigableProperty(method));
 				}
 				if (method.getAnnotation(SimpleEvent.class) != null) {
-					EventBean eb = new Event(method );
+					EventBean eb = new Event(method);
 					events.add(eb);
 				}
 			}

@@ -9,11 +9,9 @@ public class DesigableProperty extends DesigablePropertyBean {
 
 	public DesigableProperty(CtMethod method) {
 		try {
-			DesignerProperty designerProperty = (DesignerProperty) method
-					.getAnnotation(DesignerProperty.class);
+			DesignerProperty designerProperty = (DesignerProperty) method.getAnnotation(DesignerProperty.class);
 			if (designerProperty == null) {
-				throw new RuntimeException("构造AppInventor的设计视图的方法" + method
-						+ "发生错误，不存在@DesignerProperty声明");
+				throw new RuntimeException("构造AppInventor的设计视图的方法" + method + "发生错误，不存在@DesignerProperty声明");
 			} else {
 				this.defaultValue = designerProperty.defaultValue();
 				this.alwaysSend = designerProperty.alwaysSend();

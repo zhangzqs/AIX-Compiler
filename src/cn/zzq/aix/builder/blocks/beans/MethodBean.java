@@ -17,14 +17,14 @@ public class MethodBean extends BlockBean {
 			sb.append("参数说明：" + '\n');
 			for (ParameterBean parameterBean : params) {
 				String pd = parameterBean.name + ':' + parameterBean.type;
-				pd += '\n'+tabs + parameterBean.description;
+				pd += '\n' + tabs + parameterBean.description;
 				sb.append(pd + '\n');
 			}
 		}
 		if (returnType != null) {
 			sb.append("返回值:" + returnType + '\n' + tabs + returnDescription);
 		}
-		//System.out.println(sb);
+		// System.out.println(sb);
 		return sb.toString();
 	}
 }

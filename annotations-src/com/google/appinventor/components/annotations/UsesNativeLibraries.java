@@ -20,14 +20,19 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface UsesNativeLibraries {
 
-  /**
-   * The names of the libraries separated by commas. Filenames of native libraries targeted at
-   * Armeabi-v7A must end (after name but before the file extension) with a suffix
-   * defined in Compiler.java ("-v7a") the same goes for v8a libraries ("-v8a").
-   */
-  String libraries() default "";
-  String v7aLibraries() default "";
-  String v8aLibraries() default "";
-  String x86Libraries() default "";
-  String x86_64Libraries() default "";
+	/**
+	 * The names of the libraries separated by commas. Filenames of native libraries
+	 * targeted at Armeabi-v7A must end (after name but before the file extension)
+	 * with a suffix defined in Compiler.java ("-v7a") the same goes for v8a
+	 * libraries ("-v8a").
+	 */
+	String libraries() default "";
+
+	String v7aLibraries() default "";
+
+	String v8aLibraries() default "";
+
+	String x86Libraries() default "";
+
+	String x86_64Libraries() default "";
 }
