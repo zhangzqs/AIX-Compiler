@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Collection;
@@ -31,8 +32,7 @@ public class Path extends File {
 	/**
 	 * 根据一个绝对路径创建一个Path对象
 	 * 
-	 * @param absPath
-	 *            绝对路径
+	 * @param absPath 绝对路径
 	 */
 	public Path(String absPath) {
 		super(absPath);
@@ -41,8 +41,7 @@ public class Path extends File {
 	/**
 	 * 根据File对象创建一个Path对象
 	 * 
-	 * @param file
-	 *            File对象
+	 * @param file File对象
 	 */
 	public Path(File file) {
 		super(file.getAbsolutePath());
@@ -52,14 +51,12 @@ public class Path extends File {
 		this("");
 	}
 
-	public static Path createPathByPackageName(Path parentPath,
-			String packageName) {
+	public static Path createPathByPackageName(Path parentPath, String packageName) {
 		return parentPath.forward(packageName.split("[.]"));
 	}
 
 	/**
-	 * @param childFileNames
-	 *            前往该路径下的指定子文件夹
+	 * @param childFileNames 前往该路径下的指定子文件夹
 	 * @return 返回该子文件夹的Path对象
 	 */
 	public Path forward(String... childFileNames) {
@@ -154,8 +151,7 @@ public class Path extends File {
 	/**
 	 * 删除一个文件，或一个目录下的所有文件
 	 * 
-	 * @param file
-	 *            一个文件对象或目录
+	 * @param file 一个文件对象或目录
 	 */
 	private static void deleteAllFiles(File file) {
 
@@ -194,9 +190,9 @@ public class Path extends File {
 	}
 
 	public Path compressAsZip(Path filePath) throws ZipException {
-		if(this.isDirectory()){
+		if (this.isDirectory()) {
 			ZipUtils.pack(filePath, this.listChildren());
-		}else{
+		} else {
 			ZipUtils.pack(filePath, this);
 		}
 		return filePath;
@@ -215,8 +211,7 @@ public class Path extends File {
 			this.backward().mkdirs();
 		}
 		FileOutputStream outputStream = new FileOutputStream(this);
-		BufferedWriter bufferedWriter = new BufferedWriter(
-				new OutputStreamWriter(outputStream, "UTF-8"));
+		BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 		bufferedWriter.write(text);
 		bufferedWriter.flush();
 		bufferedWriter.close();
@@ -225,35 +220,21 @@ public class Path extends File {
 	}
 
 	public String readAsText() {
-		FileReader fr = null;
-		BufferedReader br = null;
-		StringBuffer sb = null;
-		try {
-			fr = new FileReader(this);
-			br = new BufferedReader(fr);
-			
-			sb = new StringBuffer();
+		return readAsText("UTF-8");
+	}
+
+	public String readAsText(String charsetName) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(this), charsetName))) {
+			StringBuffer sb = new StringBuffer();
 			String line = null;
 			while ((line = br.readLine()) != null) {
-				sb.append(line);
-				sb.append("\n");
+				sb.append(line + "\n");
 			}
 			sb.deleteCharAt(sb.length() - 1);
+			return sb.toString();
 		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fr != null) {
-					fr.close();
-				}
-				if (br != null) {
-					br.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			throw new RuntimeException(e);
 		}
-		return sb.toString();
 	}
 
 	public static Path[] toPathArray(File[] files) {
@@ -294,14 +275,11 @@ public class Path extends File {
 	/**
 	 * Copies the contents of one local file to another local file.
 	 * 
-	 * @param inputFileName
-	 *            the name of the file to read to
-	 * @param outputFileName
-	 *            the name of the file to write to
+	 * @param inputFileName  the name of the file to read to
+	 * @param outputFileName the name of the file to write to
 	 * @return the URL for the local file
 	 */
-	public static String copyFile(String inputFileName, String outputFileName)
-			throws IOException {
+	public static String copyFile(String inputFileName, String outputFileName) throws IOException {
 		InputStream in = new FileInputStream(inputFileName);
 		try {
 			return writeStreamToFile(in, outputFileName);
@@ -313,14 +291,11 @@ public class Path extends File {
 	/**
 	 * Writes the contents from the given input stream to the given file.
 	 * 
-	 * @param in
-	 *            the InputStream to read from
-	 * @param outputFileName
-	 *            the name of the file to write to
+	 * @param in             the InputStream to read from
+	 * @param outputFileName the name of the file to write to
 	 * @return the URL for the local file
 	 */
-	public static String writeStreamToFile(InputStream in, String outputFileName)
-			throws IOException {
+	public static String writeStreamToFile(InputStream in, String outputFileName) throws IOException {
 		File file = new File(outputFileName);
 
 		// Create the parent directory.
@@ -338,8 +313,7 @@ public class Path extends File {
 		}
 	}
 
-	private static void copy(InputStream in, OutputStream out)
-			throws IOException {
+	private static void copy(InputStream in, OutputStream out) throws IOException {
 		out = new BufferedOutputStream(out, 0x1000);
 		in = new BufferedInputStream(in, 0x1000);
 
@@ -360,10 +334,8 @@ public class Path extends File {
 	}
 
 	/**
-	 * @param source
-	 *            要复制的文件或目录
-	 * @param target
-	 *            复制到的目标文件或目录
+	 * @param source 要复制的文件或目录
+	 * @param target 复制到的目标文件或目录
 	 * @throws IOException
 	 */
 	public static void copy(Path source, Path target) throws IOException {
