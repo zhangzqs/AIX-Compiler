@@ -2,8 +2,6 @@
 This is an independent appinventor extension compiler, aixc.
 
 ```
-当前AIX编译器版本为：v0.21.2
-
 用法1(一般用法)：aixc <aix项目目录>
 将按照 以下项目结构编译AppInventor扩展组件
 组件项目目录
