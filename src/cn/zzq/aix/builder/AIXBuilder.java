@@ -12,48 +12,9 @@ public class AIXBuilder {
 
 	public static void main(String[] args) {
 		if (args.length == 0) {
-			System.out.println("欢迎使用AppInventor扩展组件编译器");
-			System.out.println("作者：Zhangzqs");
-			System.out.println("作者邮箱：2428698039@qq.com");
-			System.out.println("交流qq群：694521655");
-
-			System.out.println("当前AIX编译器版本为：v" + Version.version + "\n");
-			System.out.println("用法1(一般用法)：aixc <aix项目目录>");
-			System.out.println("将按照 以下项目结构编译AppInventor扩展组件");
-			System.out.println("组件项目目录");
-			System.out.println("  src");
-			System.out.println("    <组件的所有java源代码>");
-			System.out.println("  assets");
-			System.out.println("    <组件的所有依赖资源>");
-			System.out.println("  jni");
-			System.out.println("    arm64-v8a");
-			System.out.println("      <组件的依赖的arm64-v8a架构的so库>");
-			System.out.println("    armeabi-v7a");
-			System.out.println("      <组件的依赖的armeabi-v7a架构的so库>");
-			System.out.println("    x86");
-			System.out.println("      <组件的依赖的x86架构的so库>");
-			System.out.println("    x64");
-			System.out.println("      <组件的依赖的x64架构的so库>");
-			System.out.println("  lib");
-			System.out.println("    <组件的依赖的所有jar包>");
-			System.out.println("  libs");
-			System.out.println("    <组件的依赖的所有jar包>");
-			System.out.println("\n" + "用法2(高级用法)：aixc <build.json文件>");
-			System.out.println("你需要在build.json中写入以下json构建信息,srcs，output为必填项");
-			System.out.println("{");
-			System.out.println("	\"srcs\":[\"./src\"],");
-			System.out.println("	\"output\":\"./build\",");
-			System.out.println("	\"descriptor\":\"./descriptor.xml\",");
-			System.out.println("	\"assets\":[\"./assets\"],");
-			System.out.println("	\"aiwebres\":[\"./aiwebres\"],");
-			System.out.println("	\"jniDirs\":[\"./jni\"],");
-			System.out.println("	\"libraries\":[\"./lib\"]");
-			System.out.println("}");
-			System.out.println("以上json信息中.代表当前build.json所在的目录,也可以直接填写绝对路径");
-
-			Path cp = RuntimeEnvironment.RUNTIME_LIBRARY_DIR;
-			System.out.println("当前AppInventor运行时环境目录：" + cp);
-
+			System.out.println(Helper.getBaseHelpString());
+			System.out.println("当前AIX编译器版本为：v" + Version.VERSION);
+			System.out.println(RuntimeEnvironment.getDirInfo());
 			System.exit(0);
 		}
 		long beforeTime = System.currentTimeMillis();
@@ -133,7 +94,7 @@ public class AIXBuilder {
 			aixProject.addJniDirs(jniPath);
 		}
 		Path descriptorPath = projectPath.forward("descriptors");
-		if(descriptorPath.exists()) {
+		if (descriptorPath.exists()) {
 			aixProject.addXmlDescriptors(descriptorPath);
 		}
 		return aixProject;
@@ -148,7 +109,7 @@ public class AIXBuilder {
 		aixProject.compileJava();
 
 		// 开始编译kotlin代码
-		//aixProject.compileKotlin();
+		// aixProject.compileKotlin();
 		// 打包AndroidRuntime.jar
 		aixProject.packJar();
 
@@ -157,6 +118,7 @@ public class AIXBuilder {
 
 		// 打包所有组件
 		aixProject.packAIX();
+
 		// 输出日志信息
 		try {
 			aixProject.getBuildPath().forward("build.log").appendText(Logger.getLoggerText());
