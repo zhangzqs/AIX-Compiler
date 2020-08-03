@@ -1,7 +1,7 @@
 # AIX-Compiler
 This is an independent appinventor extension compiler, aixc.
 
-
+```
 当前AIX编译器版本为：v0.21.2
 
 用法1(一般用法)：aixc <aix项目目录>
@@ -27,7 +27,7 @@ This is an independent appinventor extension compiler, aixc.
   descriptor
 	<存放组件外部注释/翻译Xml文件>
 	
-用该方法编译完成后，将
+用该方法编译完成后，将生成build文件夹，其中output文件夹中存在aix文件
 
 用法2(高级用法)：aixc <build.json文件>
 你需要在build.json中写入以下json构建信息,srcs，output为必填项
@@ -42,3 +42,4 @@ This is an independent appinventor extension compiler, aixc.
 }
 
 以上json信息中.代表当前build.json所在的目录,也可以直接填写绝对路径
+```
